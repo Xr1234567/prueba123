@@ -1876,6 +1876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7536685423207835635}
   - component: {fileID: 5133370052673028054}
+  - component: {fileID: 4013547420598965104}
   m_Layer: 0
   m_Name: B
   m_TagString: Rooms
@@ -1915,6 +1916,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coordinate: {x: 0, y: 0}
+--- !u!114 &4013547420598965104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692665671193194455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9848ffacc4bdd54f8d5e2375042b817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camara: {fileID: 0}
 --- !u!1 &3759394040581700672
 GameObject:
   m_ObjectHideFlags: 0
