@@ -15,7 +15,7 @@ public class enemigo1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position , player.position-new Vector3(1,0,1), speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position , player.position, speed * Time.deltaTime);
 
         bool isPlayerOnRight = player.transform.position.x > transform.position.x;
         Flip(isPlayerOnRight);
