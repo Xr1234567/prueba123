@@ -3,21 +3,20 @@ using UnityEngine;
 
 public class PosCamara : MonoBehaviour
 {
-    public GameObject camara;
-    private float x, z;
-    private void Start()
-    {
-        x= transform.position.x;
-        z= transform.position.z;
-    }
+    [SerializeField] private Transform enemigo;
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        
-
-
         if (collision.gameObject.CompareTag("Player"))
         {
-            camara.transform.position = new Vector3(x, 10, z);
+            for (int i = 0; i < 2; i++)
+            {
+                float x = Random.Range(-4, 4);
+                float z = Random.Range(-4, 4);
+                Instantiate(enemigo, new Vector3(transform.position.x + x, 5, transform.position.z + z), Quaternion.identity);
+            }
+
         }
     }
 }

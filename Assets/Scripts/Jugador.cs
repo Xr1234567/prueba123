@@ -4,6 +4,7 @@ public class Jugador : MonoBehaviour
 {
     [SerializeField] private float velocidad;
     [SerializeField] private GameObject camara;
+    [SerializeField] private GameObject enemigo;
     private Rigidbody rb;
     private float xInput, zInput;
 
@@ -12,6 +13,7 @@ public class Jugador : MonoBehaviour
     {
         rb= GetComponent<Rigidbody>();
         camara.GetComponent<Camera>();
+        enemigo.GetComponent<enemigo1>();
     }
     private void movimiento()
     {
@@ -29,6 +31,12 @@ public class Jugador : MonoBehaviour
         if (collision.gameObject.CompareTag("Suelo"))
         {
             camara.transform.position = new Vector3(collision.transform.position.x, 10, collision.transform.position.z);
+            for (int i = 0; i < 2; i++)
+            {
+                float x = Random.Range(-4, 4);
+                float z = Random.Range(-4, 4);
+                Instantiate(enemigo, new Vector3(collision.transform.position.x + x, 0, collision.transform.position.z + z), Quaternion.identity);
+            }
         }
     }
 }
