@@ -7,6 +7,7 @@ public class Jugador : MonoBehaviour
     [SerializeField] private GameObject enemigo;
     private Rigidbody rb;
     private float xInput, zInput;
+    private bool generado = false;
 
     // Update is called once per frame
     void Awake()
@@ -31,12 +32,17 @@ public class Jugador : MonoBehaviour
         if (collision.gameObject.CompareTag("Suelo"))
         {
             camara.transform.position = new Vector3(collision.transform.position.x, 10, collision.transform.position.z);
-            for (int i = 0; i < 2; i++)
+            if (!generado)
             {
-                float x = Random.Range(-4, 4);
-                float z = Random.Range(-4, 4);
-                Instantiate(enemigo, new Vector3(collision.transform.position.x + x, 0, collision.transform.position.z + z), Quaternion.identity);
+                for (int i = 0; i < 2; i++)
+                {
+                    float x = Random.Range(-4, 4);
+                    float z = Random.Range(-4, 4);
+                    Instantiate(enemigo, new Vector3(collision.transform.position.x + x, 0, collision.transform.position.z + z), Quaternion.identity);
+                }
+                generado = true;
             }
+
         }
     }
 }
