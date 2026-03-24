@@ -1,52 +1,76 @@
 using UnityEngine;
+using System.Collections;
 
 public class MovPj : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 5f;
     private Rigidbody rb;
 
     public float VelLinear = 20f;
     public float VelDiagonal = 14.14f;
 
-    public float tiempo = 3;
+    // cooldown duration (seconds)
+    public float tiempo = 3f;
     public float temporizador;
 
+    private float MoveH, MoveV;
+
     public bool _dashing;
+
+    [SerializeField] private float dashMultiplier = 5f;
+    [SerializeField] private float dashDuration = 0.10f;
+
+    private Vector2 input;
+    private float cooldownTimer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cooldownTimer = temporizador;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float MoveH = Input.GetAxis("MovH");
-        float MoveV = Input.GetAxis("MovV");
+        // Read inputs every frame
+        input.x = Input.GetAxisRaw("Horizontal");
+        input.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.Space) && temporizador <= 0)
+        MoveH = input.x;
+        MoveV = input.y;
+
+        // Trigger dash once when key pressed and cooldown finished
+        if (Input.GetKeyDown(KeyCode.Space) && cooldownTimer <= 0f)
         {
-            Dasheo(MoveH, MoveV);
-            temporizador = tiempo;
-            _dashing = true;
+            StartCoroutine(DashCoroutine());
         }
-        if (temporizador >= 0) temporizador -= Time.deltaTime;
 
-        if (!_dashing) transform.Translate(new Vector3(MoveH, 0, MoveV) * speed * Time.deltaTime);
+        // Update cooldown timer and sync inspector value
+        if (cooldownTimer > 0f)
+        {
+            cooldownTimer -= Time.deltaTime;
+            temporizador = Mathf.Max(cooldownTimer, 0f);
+        }
+        else
+        {
+            temporizador = 0f;
+        }
     }
-    bool Dasheo(float direccion1, float direccion2)
+
+    void FixedUpdate()
     {
-        for (float i = 2; i <= 0; i -= Time.deltaTime)
-        {
-            if (direccion1 == 0 || direccion2 == 0)
-            {
-                transform.Translate(new Vector3(direccion1, 0, direccion2) * VelLinear * Time.deltaTime);
-            }
-            else
-            {
-                transform.Translate(new Vector3(direccion1, 0, direccion2) * VelDiagonal * Time.deltaTime);
-            }
-        }
+        Vector3 movimiento = new Vector3(-MoveV, 0f, MoveH);
+        if (movimiento.sqrMagnitude > 1f) movimiento.Normalize();
+
+        float currentSpeed = speed * (_dashing ? dashMultiplier : 1f);
+        rb.linearVelocity = movimiento * currentSpeed;
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        _dashing = true;
+        cooldownTimer = tiempo;
+        temporizador = cooldownTimer;
+        yield return new WaitForSeconds(dashDuration);
         _dashing = false;
-        return _dashing;
     }
 }
