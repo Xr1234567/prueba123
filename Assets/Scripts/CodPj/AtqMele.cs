@@ -6,10 +6,6 @@ public class AtqMele : MonoBehaviour
     public GameObject GolpeD;
     public GameObject GolpeI;
     // Selecciono puntos de spawn para los atqs. 1 para los de la derecha (primeros), y 2 para los de la izq. El atq del pj es golpe de derecha -> golpe de izquierda -> repetir
-    public Transform Der1;
-    public Transform Der2;
-    public Transform Izq1;
-    public Transform Izq2;
     public Transform Arriba1;
     public Transform Arriba2;
     public Transform Abajo1;
@@ -37,63 +33,35 @@ public class AtqMele : MonoBehaviour
         {
             if (Input.GetKey("right"))
             {
-                if (atq == true)
-                {
-                    //spawnea una copia del atq hecho en el prefab. Hay que decirle obj q copiar, posición, y rotación
-                    GameObject GolpeDTemp = Instantiate(GolpeD, Der1.position, Quaternion.Euler(0, 90, 0));
-                    atq = false;
-                }
-                else
-                {
-                    //mismo que arriba, pero conDer2 pq es el izq.
-                    GameObject GolpeITemp = Instantiate(GolpeI, Der2.position, Quaternion.Euler(0, 90, 0));
-                    atq = true;
-                }
+
+                //spawnea una copia del atq hecho en el prefab. Hay que decirle obj q copiar, posición, y rotación
+                GameObject GolpeDTemp = Instantiate(GolpeD, new Vector3(transform.position.x, 0, transform.position.z + 1), Quaternion.Euler(0, 90, 0));
                 tiempo = Temporizador;
                 TAtq = TempAtq;
             }
             else if (Input.GetKey("left"))
             {
-                if (atq == true)
-                {
-                    GameObject GolpeDTemp = Instantiate(GolpeD, Izq1.position, Quaternion.Euler(0, 90, 0));
-                    atq = false;
-                }
-                else
-                {
-                    GameObject GolpeITemp = Instantiate(GolpeI, Izq2.position, Quaternion.Euler(0, 90, 0));
-                    atq = true;
-                }
+
+                GameObject GolpeDTemp = Instantiate(GolpeD, new Vector3(transform.position.x, 0, transform.position.z - 1), Quaternion.Euler(0, 90, 0));
+
+
                 tiempo = Temporizador;
                 TAtq = TempAtq;
             }
             else if (Input.GetKey("up"))
             {
-                if (atq == true)
-                {
-                    GameObject GolpeDTemp = Instantiate(GolpeD, Arriba1.position, Quaternion.identity);
-                    atq = false;
-                }
-                else
-                {
-                    GameObject GolpeITemp = Instantiate(GolpeI, Arriba2.position, Quaternion.identity);
-                    atq = true;
-                }
+
+                GameObject GolpeDTemp = Instantiate(GolpeD, new Vector3(transform.position.x - 1, 0, transform.position.z), Quaternion.identity);
+
+
                 tiempo = Temporizador;
                 TAtq = TempAtq;
             }
             else if (Input.GetKey("down"))
             {
-                if (atq == true)
-                {
-                    GameObject GolpeDTemp = Instantiate(GolpeD, Abajo1.position, Quaternion.identity);
-                    atq = false;
-                }
-                else
-                {
-                    GameObject GolpeITemp = Instantiate(GolpeI, Abajo2.position, Quaternion.identity);
-                    atq = true;
-                }
+
+                GameObject GolpeDTemp = Instantiate(GolpeD, new Vector3(transform.position.x + 1, 0, transform.position.z), Quaternion.identity);
+
                 tiempo = Temporizador;
                 TAtq = TempAtq;
             }

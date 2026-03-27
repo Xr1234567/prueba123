@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 6907893440201489762}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
