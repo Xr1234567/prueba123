@@ -7,6 +7,8 @@ public class AtqMele : MonoBehaviour
     public GameObject GolpeI;
     // Selecciono puntos de spawn para los atqs. 1 para los de la derecha (primeros), y 2 para los de la izq. El atq del pj es golpe de derecha -> golpe de izquierda -> repetir
 
+    public static AtqMele instance;
+    public float danno = 1f;
 
     //Temporizador dicta cada cuántos segundos va a poder atacar, mientras que tiempo sirve para hacer la función de temporizador (ir bajandole el tiempo hasta que sea 0)
     public float Temporizador = 1f;

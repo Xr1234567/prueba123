@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class enemigo1 : MonoBehaviour
 {
+    public enemigo1 instance;
     private Transform player;
     public float speed = 10f;
+    [SerializeField] float vida = 4f;
 
     private bool IsFacingRight = true;
 
@@ -19,6 +21,10 @@ public class enemigo1 : MonoBehaviour
 
         bool isPlayerOnRight = player.transform.position.x > transform.position.x;
         Flip(isPlayerOnRight);
+        if (vida <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Flip(bool isPlayerOnRight)
@@ -30,5 +36,13 @@ public class enemigo1 : MonoBehaviour
             localScale.x *= -1;
             transform.localScale = localScale;
         }
+    }
+    public void QuitarVida(float danno)
+    {
+        vida=vida-danno;
+    }
+    public void QuitarVida()
+    {
+        vida--;
     }
 }

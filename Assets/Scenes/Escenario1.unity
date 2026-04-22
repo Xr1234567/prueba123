@@ -778,7 +778,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GolpeD: {fileID: 4413051436601755039, guid: 4f82b677fd47c974a85413e62a912848, type: 3}
   GolpeI: {fileID: 4413051436601755039, guid: 4f82b677fd47c974a85413e62a912848, type: 3}
-  Temporizador: 1
+  danno: 1
+  Temporizador: 0.5
   tiempo: 0
   atq: 1
   TempAtq: 4
